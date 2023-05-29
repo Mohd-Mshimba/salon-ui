@@ -3,7 +3,7 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="dashboard">
+      <a mat-list-item routerLink="/resources">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Dashboard
       </a>
       <a mat-list-item routerLink="customer">
@@ -20,7 +20,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>solon-ui</span>
+      <!-- <span>solon-ui</span> -->
       <span class="spacer"></span>
       <span class="right-links">
         <a mat-button class="no-underline">
@@ -38,6 +38,8 @@
       </span>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <router-outlet></router-outlet>
+    <div class="container-fluid mt-4">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
