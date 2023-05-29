@@ -29,8 +29,8 @@ export class LoginComponent {
     const password = this.submitForm.value.password;
     this.authServices.login(username,password).subscribe({
       next: (res) => {
-        localStorage.setItem("username",res.username)
-        localStorage.setItem("roles",res.roles)
+        localStorage.setItem("username",res.username);
+        localStorage.setItem("roles",res.roles);
         if (res.roles=='customer') {
           this.router.navigate(['/dashboard']);
         }else if(res.roles=='admin'){

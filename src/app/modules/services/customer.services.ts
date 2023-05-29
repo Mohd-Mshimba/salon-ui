@@ -24,6 +24,11 @@ export class CustomerService {
     return this.http.post<Customer>(this.apiUrl, body);
   }
 
+  getLogedIn(email: any): Observable<Customer> {
+    const url = `${this.apiUrl}/getLogin/${email}`;
+    return this.http.get<Customer>(url);
+  }
+
   getById(id: any): Observable<Customer> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Customer>(url);

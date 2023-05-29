@@ -1,9 +1,11 @@
+import { SwalService } from './../../modules/shared/swal.service';
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { CustomerService } from 'src/app/modules/services/customer.services';
 
 @Component({
   selector: 'app-navigation',
@@ -11,6 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent {
+
+  userDetails: any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -20,8 +24,26 @@ export class NavigationComponent {
 
   constructor(
     private router:Router,
+    private customerService:CustomerService,
+    private swalService:SwalService,
     private breakpointObserver: BreakpointObserver
     ) {}
+
+    ngOnInit(): void {
+      const email = localStorage.getItem('username');
+
+      this.customerService.getLogedIn(email).subscribe({
+        next: (res:any) => {
+          this.userDetails = res[0];
+        },
+        error: () => {
+          this.swalService.errorNotification("User we're not found");
+        }
+      });
+    }
+    getLogedIn(){
+
+    }
 
   onLogOut(){
     Swal.fire({
