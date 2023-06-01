@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './layout/navigation/navigation.component';
 import { DashboardComponent } from './modules/pages/dashboard/dashboard.component';
 import { RegistrationComponent } from './modules/auth/registration/registration.component';
+import { ViewCustomerComponent } from './modules/pages/customer/view-customer/view-customer.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { RegistrationComponent } from './modules/auth/registration/registration.
     NavigationComponent,
     LoginComponent,
     DashboardComponent,
+    ViewCustomerComponent,
     RegistrationComponent,
   ],
   schemas: [

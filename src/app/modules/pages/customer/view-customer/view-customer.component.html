@@ -1,5 +1,78 @@
 <div class="row">
   <div class="col-md-12">
-    <h1>Customers</h1>
+    <h1>Customers</h1><hr>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 text-right">
+    <input type="email" name="" class="form-control" placeholder="Search ..." id="">
+  </div>
+  <div class="col-sm-6 text-right">
+    <button type="submit" class="btn btn-primary mb-2">Create Data</button>
+  </div>
+</div>
+<div class="mat-elevation-z5" style="margin: 3px 0px;">
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i=index"> {{i+1}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fullname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> fullname </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fullname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> gender </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> phoneNumber </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="street">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> street </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.street}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> city </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> state </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="zipCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> zipCode </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.zipCode}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button class="btn btn-sm" (click)="onEdit(element)">
+          <i class="fas fa-edit"></i> edit
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <hr>
+  <div class="card text-center m-3 pagination flex-wrap">
+    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 100]" showFirstLastButtons aria-label="Select page"
+      aria-hidden="true"></mat-paginator>
   </div>
 </div>

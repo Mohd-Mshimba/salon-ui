@@ -10,6 +10,7 @@ export interface CustomerResponse {
 export interface Customer {
   id?: number;
   firstName: string;
+  middleName:String;
   lastName: string;
   email: string;
   phoneNumber: string;
