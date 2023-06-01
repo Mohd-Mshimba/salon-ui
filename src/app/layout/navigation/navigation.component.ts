@@ -15,6 +15,7 @@ import { CustomerService } from 'src/app/modules/services/customer.services';
 export class NavigationComponent {
 
   userDetails: any;
+  roles!: string | null
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -30,8 +31,14 @@ export class NavigationComponent {
     ) {}
 
     ngOnInit(): void {
+      this.roles = localStorage.getItem('roles');
       const email = localStorage.getItem('username');
-
+      console.log('=================role===================');
+      console.log(this.roles);
+      console.log('====================================');
+      if (!this.roles) {
+        this.router.navigate(['']);
+      }
       this.customerService.getLogedIn(email).subscribe({
         next: (res:any) => {
           this.userDetails = res[0];
@@ -41,9 +48,12 @@ export class NavigationComponent {
         }
       });
     }
-    getLogedIn(){
 
-    }
+    // hasRole(role: number | number[]) {
+    //   const userRole = this.authService.UserInfo.role;
+    //   if (role instanceof Array) return role.includes(userRole);
+    //   return role === userRole;
+    // }
 
   onLogOut(){
     Swal.fire({
@@ -56,6 +66,7 @@ export class NavigationComponent {
       confirmButtonText: 'Yes, Logout!'
     }).then((result) => {
       if (result.isConfirmed) {
+        localStorage.clear();
         this.router.navigate(['']);
       }
     })

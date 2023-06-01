@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col-sm-6 text-right">
-    <input type="email" name="" class="form-control" placeholder="Search ..." id="">
+    <input class="form-control" type="search" placeholder="Search ..."  (keyup)="applyFilter($event)" #input>
   </div>
   <div class="col-sm-6 text-right">
     <button type="submit" class="btn btn-primary mb-2">Create Data</button>
@@ -19,50 +19,62 @@
     </ng-container>
 
     <ng-container matColumnDef="fullname">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> fullname </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.fullname}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{element.fistName}} {{element.middleName}} {{element.lastName}}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="gender">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> gender </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> email </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="phoneNumber">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> phoneNumber </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="street">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> street </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Street </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.street}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="city">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> city </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="state">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> state </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> State </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="zipCode">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> zipCode </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Zip Code </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.zipCode}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        Active
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <button class="btn btn-sm" (click)="onEdit(element)">
-          <i class="fas fa-edit"></i> edit
+        <button class="btn btn-outline-primary btn-sm m-1" (click)="onEdit(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button class="btn btn-outline-danger btn-sm m-1" (click)="onEdit(element)">
+          <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
@@ -70,8 +82,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <hr>
-  <div class="card text-center m-3 pagination flex-wrap">
+  <div class="card text-center pb-1 pagination flex-wrap">
     <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15, 20, 100]" showFirstLastButtons aria-label="Select page"
       aria-hidden="true"></mat-paginator>
   </div>

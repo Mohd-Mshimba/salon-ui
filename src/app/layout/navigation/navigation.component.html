@@ -6,11 +6,14 @@
       <a mat-list-item routerLink="/resources">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Dashboard
       </a>
-      <a mat-list-item routerLink="customer">
+      <a mat-list-item routerLink="customer" *ngIf="roles=='customer'">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Customer
       </a>
-      <a mat-list-item routerLink="appointment">
+      <a mat-list-item routerLink="appointment" *ngIf="roles=='customer'">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Appointment
+      </a>
+      <a mat-list-item routerLink="appointment" *ngIf="roles=='admin'">
+        <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> User List
       </a>
     </mat-nav-list>
   </mat-sidenav>

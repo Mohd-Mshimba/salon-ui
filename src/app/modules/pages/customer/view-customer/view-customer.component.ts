@@ -7,6 +7,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {  MatPaginator } from '@angular/material/paginator';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
@@ -15,7 +16,7 @@ import { EditCustomerComponent } from '../edit-customer/edit-customer.component'
 export class ViewCustomerComponent {
 
   dataSource!: MatTableDataSource<any>;
-  displayedColumns = ['id','fullname','gender','email','phoneNumber','street','city','state','zipCode','action'];
+  displayedColumns = ['id','fullname','gender','email','phoneNumber','street','city','state','zipCode','status','action'];
 
   filteredItems: number = 0;
   pageSize: number = 0;
@@ -23,6 +24,7 @@ export class ViewCustomerComponent {
   reportObject: any = null;
   totalProduct: number = 0;
   loading:boolean=false
+  roles!:String|null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -32,6 +34,7 @@ export class ViewCustomerComponent {
   constructor(
     private customerService: CustomerService,
     public dialog: MatDialog,
+    private router:Router,
   ) {}
 
   ngOnInit(): void {
