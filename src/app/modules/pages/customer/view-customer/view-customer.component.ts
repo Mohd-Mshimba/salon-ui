@@ -69,7 +69,7 @@ export class ViewCustomerComponent {
 
   onCreate() {
     const options = {
-      width: '30%',
+      width: '35%',
       disableClose: true,
     };
     const dialogRef = this.dialog.open(AddCustomerComponent, options);
@@ -81,7 +81,7 @@ export class ViewCustomerComponent {
       data: {
         item: item,
       },
-      width: '30%',
+      width: '35%',
       disableClose: true,
     };
     const dialogRef = this.dialog.open(EditCustomerComponent, options);

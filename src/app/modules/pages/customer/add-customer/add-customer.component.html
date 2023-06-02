@@ -1,1 +1,101 @@
-<p>add-customer works!</p>
+<form [formGroup]="submitForm" (ngSubmit)="onSubmit()">
+  <h2>Add Customer</h2><hr>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="firstName">
+          First Name<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="firstName" formControlName="firstName" aria-describedby="firstName">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="middleName">
+          Middle Name<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="middleName" formControlName="middleName"
+          aria-describedby="middleName">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="lastName">
+          Last Name<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="lastName" formControlName="lastName" aria-describedby="lastName">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="gender">
+          Gender<span>*</span>
+        </label>
+        <mat-select class="form-control" id="lastName" formControlName="lastName">
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+        </mat-select>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="phoneNumber">
+          Phone Number<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+          aria-describedby="phoneNumber">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="email">
+          Email<span>*</span>
+        </label>
+        <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="email">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="street">
+          Street<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="street" formControlName="street" aria-describedby="street">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="city">
+          City<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="city" formControlName="city" aria-describedby="city">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="state">
+          State<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="state" formControlName="state" aria-describedby="state">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="zipCode">
+          Zip Code<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="zipCode" formControlName="zipCode" aria-describedby="zipCode">
+      </div>
+    </div>
+  </div><hr>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-primary m-1" [disabled]="submitForm.invalid">Save</button>
+      <button type="button" class="btn btn-danger m-1" matDialogClose="no">Close</button>
+    </div>
+  </div>
+</form>
