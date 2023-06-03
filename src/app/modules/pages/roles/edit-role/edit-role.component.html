@@ -1,6 +1,14 @@
 <form [formGroup]="submitForm" (ngSubmit)="onSubmit()">
-  <h2>Add Appointment</h2><hr>
+  <h2>Add Roles</h2><hr>
   <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="roleName">
+          Role Name<span>*</span>
+        </label>
+        <input type="text" class="form-control" id="roleName" formControlName="roleName" aria-describedby="roleName">
+      </div>
+    </div>
     <div class="col-md-12">
       <div class="form-group">
         <label for="description">

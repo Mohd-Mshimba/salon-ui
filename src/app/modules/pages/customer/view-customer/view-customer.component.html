@@ -63,7 +63,8 @@
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        Active
+        <span *ngIf="element.status==0" class="badge badge-danger">InActive</span>
+        <span *ngIf="element.status==1" class="badge badge-success">Active</span>
       </mat-cell>
     </ng-container>
 
@@ -73,7 +74,7 @@
         <button class="btn btn-outline-primary btn-sm m-1" (click)="onEdit(element)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button class="btn btn-outline-danger btn-sm m-1" (click)="onEdit(element)">
+        <button class="btn btn-outline-danger btn-sm m-1" (click)="onDelete(element)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

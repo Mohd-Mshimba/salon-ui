@@ -5,26 +5,46 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SwalService } from 'src/app/modules/shared/swal.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { Router } from '@angular/router';
-
+import { RoleService } from 'src/app/modules/services/role.service';
+import { Role } from 'src/app/modules/models/role.model';
+import { EmployeeService } from 'src/app/modules/services/employee.service';
 @Component({
-  selector: 'app-add-customer',
-  templateUrl: './add-customer.component.html',
-  styleUrls: ['./add-customer.component.scss']
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.scss']
 })
-export class AddCustomerComponent {
+export class AddUserComponent {
   submitForm!: FormGroup;
   loading: boolean = false;
+  roles: Role[] = [];
 
   constructor(
-    private customerService: CustomerService,
+    private employeeService: EmployeeService,
     private authServices: AuthServices,
+    private roleService: RoleService,
     private swalService: SwalService,
     private router: Router,
-    private dialogRef: DialogRef<AddCustomerComponent>
+    private dialogRef: DialogRef<AddUserComponent>
   ) { }
 
   ngOnInit(): void {
     this.onCreate();
+    this.getAllRole(0, 10);
+  }
+
+  getAllRole(page: number, size: number) {
+    this.roleService.getAll(page, size).subscribe({
+      next: (res: any) => {
+        console.log('====================================');
+        console.log(res);
+        console.log('====================================');
+        this.roles = res;
+      },
+      error: () => {
+        this.swalService.successNotification("Roles we're not found")
+      },
+      complete: () => this.loading = false,
+    });
   }
 
   onCreate() {
@@ -34,26 +54,33 @@ export class AddCustomerComponent {
       middleName: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required]),
       phoneNumber: new FormControl("", [Validators.required]),
-      street: new FormControl("", [Validators.required]),
       city: new FormControl("", [Validators.required]),
-      state: new FormControl("", [Validators.required]),
-      status: new FormControl(1),
-      zipCode: new FormControl("", [Validators.required]),
       gender: new FormControl("", [Validators.required]),
-      role: new FormControl("", [Validators.required]),
+      status: new FormControl(1),
+      roles: new FormControl("", [Validators.required]),
     })
   }
 
   onSubmit() {
     this.loading = true;
     const submitForm = this.submitForm.value;
+    const requestData = { ...submitForm,
+      roles:{
+        id:submitForm.roles,
+        roleName:'',
+        description:'',
+      }
+    }
+    delete requestData.roleName;
+
     let loginData = {
       username: `${this.submitForm.value.email}`,
       password: `${'12345'}`,
-      roles: `${'customer'}`
+      roles: `${'admin'}`
     };
-    this.customerService.add(submitForm).subscribe({
-      next: (data) => {
+
+    this.employeeService.add(requestData).subscribe({
+      next: () => {
         this.authServices.add(loginData).subscribe({
           next: () => {
             this.swalService.successNotification("Data Successfully Created");
@@ -75,7 +102,7 @@ export class AddCustomerComponent {
 
   reload() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/resources/customer']);
+      this.router.navigate(['/resources/users']);
     });
   }
 

@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SwalService } from 'src/app/modules/shared/swal.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { Router } from '@angular/router';
 import { AppointmentService } from 'src/app/modules/services/appointment.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Appointment } from 'src/app/modules/models/appointment.model';
 
 @Component({
-  selector: 'app-add-appointment',
-  templateUrl: './add-appointment.component.html',
-  styleUrls: ['./add-appointment.component.scss']
+  selector: 'app-edit-appointment',
+  templateUrl: './edit-appointment.component.html',
+  styleUrls: ['./edit-appointment.component.scss']
 })
-export class AddAppointmentComponent {
+export class EditAppointmentComponent {
   submitForm!: FormGroup;
   loading: boolean = false;
 
@@ -18,7 +20,8 @@ export class AddAppointmentComponent {
     private appointmentService: AppointmentService,
     private swalService: SwalService,
     private router: Router,
-    private dialogRef: DialogRef<AddAppointmentComponent>
+    @Inject(MAT_DIALOG_DATA) public data:{item:Appointment},
+    private dialogRef: DialogRef<EditAppointmentComponent>
   ) { }
 
   ngOnInit(): void {
@@ -26,23 +29,26 @@ export class AddAppointmentComponent {
   }
 
   onCreate() {
+    const data = this.data.item
     this.submitForm = new FormGroup({
-      status: new FormControl('1'),
-      appointmentDate: new FormControl(new Date()),
-      description: new FormControl("", [Validators.required]),
+      id: new FormControl(data.id),
+      appointmentDate: new FormControl(data.appointmentDate),
+      description: new FormControl(data.description, [Validators.required]),
+      status: new FormControl(data.status),
     })
   }
 
   onSubmit() {
-    const id = localStorage.getItem("id");
+    const customerId = localStorage.getItem("id");
     this.loading = true;
+    const id = this.submitForm.value.id;
     const data = this.submitForm.value;
     const requestBody = {
       appointmentDate: data.appointmentDate,
       description: data.description,
       status: data.status,
       customer: {
-        id: id,
+        id: customerId,
         firstName: '',
         middleName: '',
         lastName: '',
@@ -56,7 +62,7 @@ export class AddAppointmentComponent {
         gender: '',
       }
     };
-    this.appointmentService.add(requestBody).subscribe({
+    this.appointmentService.update(id, requestBody).subscribe({
       next: () => {
         this.swalService.successNotification("Appointment Successfully Created");
         this.reload();

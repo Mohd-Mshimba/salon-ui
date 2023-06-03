@@ -4,6 +4,8 @@ import { NavigationComponent } from "./navigation/navigation.component";
 import { ViewCustomerComponent } from "../modules/pages/customer/view-customer/view-customer.component";
 import { ViewAppointmentComponent } from "../modules/pages/appointment/view-appointment/view-appointment.component";
 import { DashboardComponent } from "../modules/pages/dashboard/dashboard.component";
+import { ViewUserComponent } from "../modules/pages/users/view-user/view-user.component";
+import { ViewRoleComponent } from "../modules/pages/roles/view-role/view-role.component";
 
 const routes: Routes = [
   {
@@ -19,6 +21,12 @@ const routes: Routes = [
       },{
         path:'appointment',
         component:ViewAppointmentComponent
+      },{
+        path:'users',
+        component:ViewUserComponent
+      },{
+        path:'roles',
+        component:ViewRoleComponent
       },
     ]
   }

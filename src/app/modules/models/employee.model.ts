@@ -1,23 +1,22 @@
-export interface CustomerResponse {
+export interface EmployeeResponse {
   totalItems: number;
   itemCount: number;
   itemsPerPage: number;
   totalPages: number;
   currentPage: number;
-  data: [Customer];
+  data: [Employee];
 }
 
-export interface Customer {
+export interface Employee {
   id?: number;
   firstName: string;
-  middleName:String;
   lastName: string;
-  email: string;
+  middleName: string;
   phoneNumber: string;
-  street: string;
   city: string;
-  status: string;
-  state: string;
-  zipCode: string;
   gender: string;
+  status: string;
+  email: string;
+  role: string;
 }
+

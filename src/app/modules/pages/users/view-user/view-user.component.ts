@@ -4,30 +4,32 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import {  MatPaginator } from '@angular/material/paginator';
-import { AddCustomerComponent } from '../add-customer/add-customer.component';
-import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
+import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SwalService } from 'src/app/modules/shared/swal.service';
 import { AuthServices } from 'src/app/modules/auth/services/auth-services';
+import { EmployeeService } from 'src/app/modules/services/employee.service';
+import { AddUserComponent } from '../add-user/add-user.component';
+import { EditUserComponent } from '../edit-user/edit-user.component';
+
 @Component({
-  selector: 'app-view-customer',
-  templateUrl: './view-customer.component.html',
-  styleUrls: ['./view-customer.component.scss']
+  selector: 'app-view-user',
+  templateUrl: './view-user.component.html',
+  styleUrls: ['./view-user.component.scss']
 })
-export class ViewCustomerComponent {
+export class ViewUserComponent {
 
   dataSource!: MatTableDataSource<any>;
-  displayedColumns = ['id','fullname','gender','email','phoneNumber','street','city','state','zipCode','status','action'];
+  displayedColumns = ['id', 'fullname', 'gender', 'email', 'phoneNumber', 'city', 'role', 'status', 'action'];
 
   filteredItems: number = 0;
   pageSize: number = 0;
   reportDataLoaded: boolean = false;
   reportObject: any = null;
   totalData: number = 0;
-  loading:boolean=false
-  roles!:String|null;
+  loading: boolean = false
+  roles!: String | null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -35,12 +37,12 @@ export class ViewCustomerComponent {
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(
-    private customerService: CustomerService,
+    private employeeService: EmployeeService,
     public dialog: MatDialog,
-    private authServices:AuthServices,
-    private swalService:SwalService,
-    private router:Router,
-  ) {}
+    private authServices: AuthServices,
+    private swalService: SwalService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource();
@@ -48,7 +50,7 @@ export class ViewCustomerComponent {
   }
 
   getAll(page: number, size: number) {
-    this.customerService.getAll(page, size).subscribe({
+    this.employeeService.getAll(page, size).subscribe({
       next: (res: any) => {
         const totalItems = res.totalItems;
         const pageSize = res.pageSize;
@@ -77,11 +79,12 @@ export class ViewCustomerComponent {
       width: '35%',
       disableClose: true,
     };
-    const dialogRef = this.dialog.open(AddCustomerComponent, options);
+    const dialogRef = this.dialog.open(AddUserComponent, options);
   }
 
   onDelete(item: Customer) {
     const id = item.id;
+    const email = item.email;
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -92,10 +95,18 @@ export class ViewCustomerComponent {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.customerService.delete(id).subscribe({
+        this.employeeService.delete(id).subscribe({
           next: () => {
-            this.swalService.successNotification("Customer Successfully deleted");
-            this.getAll(0,10);
+            this.authServices.deleteByUsername(email).subscribe({
+              next: () => {
+                this.swalService.successNotification("User Successfully deleted");
+                this.getAll(0, 10);
+              },
+              error: () => {
+                this.swalService.successNotification("Data Fail Created")
+              },
+              complete: () => this.loading = false,
+            });
           },
           error: () => {
             this.swalService.successNotification("Data Fail Created")
@@ -115,7 +126,7 @@ export class ViewCustomerComponent {
       width: '35%',
       disableClose: true,
     };
-    const dialogRef = this.dialog.open(EditCustomerComponent, options);
+    const dialogRef = this.dialog.open(EditUserComponent, options);
   }
 
   clearTableData() {

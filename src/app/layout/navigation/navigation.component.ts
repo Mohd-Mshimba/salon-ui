@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { CustomerService } from 'src/app/modules/services/customer.services';
+import { CustomerService } from 'src/app/modules/services/customer.service';
 
 @Component({
   selector: 'app-navigation',
@@ -16,6 +16,7 @@ export class NavigationComponent {
 
   userDetails: any;
   roles!: string | null
+email:any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -32,15 +33,13 @@ export class NavigationComponent {
 
     ngOnInit(): void {
       this.roles = localStorage.getItem('roles');
-      const email = localStorage.getItem('username');
-      console.log('=================role===================');
-      console.log(this.roles);
-      console.log('====================================');
+      this.email = localStorage.getItem('username');
       if (!this.roles) {
         this.router.navigate(['']);
       }
-      this.customerService.getLogedIn(email).subscribe({
+      this.customerService.getLogedIn(this.email).subscribe({
         next: (res:any) => {
+          localStorage.setItem("id",res[0]?.id)
           this.userDetails = res[0];
         },
         error: () => {

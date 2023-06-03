@@ -1,5 +1,5 @@
 <form [formGroup]="submitForm" (ngSubmit)="onSubmit()">
-  <h2>Add Customer</h2><hr>
+  <h2>Add Users</h2><hr>
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
@@ -60,14 +60,6 @@
 
     <div class="col-md-6">
       <div class="form-group">
-        <label for="street">
-          Street<span>*</span>
-        </label>
-        <input type="text" class="form-control" id="street" formControlName="street" aria-describedby="street">
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
         <label for="city">
           City<span>*</span>
         </label>
@@ -77,18 +69,14 @@
 
     <div class="col-md-6">
       <div class="form-group">
-        <label for="state">
-          State<span>*</span>
+        <label for="roles">
+          Roles<span>*</span>
         </label>
-        <input type="text" class="form-control" id="state" formControlName="state" aria-describedby="state">
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="zipCode">
-          Zip Code<span>*</span>
-        </label>
-        <input type="text" class="form-control" id="zipCode" formControlName="zipCode" aria-describedby="zipCode">
+        <mat-select class="form-control" id="roles" formControlName="roles" aria-describedby="roles">
+          <mat-option *ngFor="let item of roles" [value]="item.id">
+            {{ item.roleName }}
+          </mat-option>
+        </mat-select>
       </div>
     </div>
   </div><hr>

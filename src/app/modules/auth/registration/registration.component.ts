@@ -1,5 +1,5 @@
 import { SwalService } from './../../shared/swal.service';
-import { CustomerService } from './../../services/customer.services';
+import { CustomerService } from '../../services/customer.service';
 import { AuthServices } from './../services/auth-services';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -32,6 +32,7 @@ export class RegistrationComponent {
       street: new FormControl("", Validators.required),
       city: new FormControl("", Validators.required),
       state: new FormControl("", Validators.required),
+      status: new FormControl(1, Validators.required),
       zipCode: new FormControl("", Validators.required),
       gender: new FormControl("", Validators.required),
     })

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <h1>Appointment</h1><hr>
+    <h1>Users</h1><hr>
   </div>
 </div>
 <div class="row">
@@ -19,24 +19,43 @@
       <mat-cell *matCellDef="let element; let i=index"> {{i+1}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+    <ng-container matColumnDef="fullname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        {{element.description}}
+        {{element.fistName}} {{element.middleName}} {{element.lastName}}
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="appointmentDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Appointment Date </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.appointmentDate}} </mat-cell>
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.phoneNumber}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Roles </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.roles.roleName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <span *ngIf="element.status==0" class="badge badge-danger">Rejected</span>
-        <span *ngIf="element.status==1" class="badge badge-warning">Requested</span>
-        <span *ngIf="element.status==2" class="badge badge-success">Approved</span>
+        <span *ngIf="element.status==0" class="badge badge-danger">InActive</span>
+        <span *ngIf="element.status==1" class="badge badge-success">Active</span>
       </mat-cell>
     </ng-container>
 

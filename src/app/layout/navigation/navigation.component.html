@@ -6,14 +6,17 @@
       <a mat-list-item routerLink="/resources">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Dashboard
       </a>
-      <a mat-list-item routerLink="customer" *ngIf="roles=='customer'">
+      <a mat-list-item routerLink="customer" *ngIf="roles=='admin'">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Customer
       </a>
       <a mat-list-item routerLink="appointment" *ngIf="roles=='customer'">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Appointment
       </a>
-      <a mat-list-item routerLink="appointment" *ngIf="roles=='admin'">
+      <a mat-list-item routerLink="users" *ngIf="roles=='admin'">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> User List
+      </a>
+      <a mat-list-item routerLink="roles" *ngIf="roles=='admin'">
+        <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Roles
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -28,12 +31,7 @@
       <span class="right-links">
         <a mat-button class="no-underline">
           <img src="./assets/img/avater.png" alt="Profile Image" class="profile-image">
-          <span *ngIf="userDetails">
-            {{ userDetails?.firstName }}. {{ userDetails?.lastName }}
-          </span>
-          <span *ngIf="!userDetails">
-            Undefine. Undefine
-          </span>
+            {{ email }}
         </a>
         <a mat-button (click)="onLogOut()">
           <mat-icon>power_settings_new</mat-icon>

@@ -14,6 +14,13 @@ import { ViewAppointmentComponent } from './modules/pages/appointment/view-appoi
 import { AddAppointmentComponent } from './modules/pages/appointment/add-appointment/add-appointment.component';
 import { AddCustomerComponent } from './modules/pages/customer/add-customer/add-customer.component';
 import { EditCustomerComponent } from './modules/pages/customer/edit-customer/edit-customer.component';
+import { EditAppointmentComponent } from './modules/pages/appointment/edit-appointment/edit-appointment.component';
+import { AddUserComponent } from './modules/pages/users/add-user/add-user.component';
+import { EditUserComponent } from './modules/pages/users/edit-user/edit-user.component';
+import { ViewUserComponent } from './modules/pages/users/view-user/view-user.component';
+import { AddRoleComponent } from './modules/pages/roles/add-role/add-role.component';
+import { EditRoleComponent } from './modules/pages/roles/edit-role/edit-role.component';
+import { ViewRoleComponent } from './modules/pages/roles/view-role/view-role.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +34,13 @@ import { EditCustomerComponent } from './modules/pages/customer/edit-customer/ed
     AddAppointmentComponent,
     AddCustomerComponent,
     EditCustomerComponent,
+    EditAppointmentComponent,
+    AddUserComponent,
+    EditUserComponent,
+    ViewUserComponent,
+    AddRoleComponent,
+    EditRoleComponent,
+    ViewRoleComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

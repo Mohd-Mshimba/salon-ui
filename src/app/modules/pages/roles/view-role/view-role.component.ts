@@ -1,3 +1,4 @@
+import { RoleService } from './../../../services/role.service';
 import { CustomerService } from 'src/app/modules/services/customer.service';
 import { Customer } from 'src/app/modules/models/customer.model';
 import { Component, ViewChild } from '@angular/core';
@@ -5,21 +6,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {  MatPaginator } from '@angular/material/paginator';
-import { AddCustomerComponent } from '../add-customer/add-customer.component';
-import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SwalService } from 'src/app/modules/shared/swal.service';
-import { AuthServices } from 'src/app/modules/auth/services/auth-services';
-@Component({
-  selector: 'app-view-customer',
-  templateUrl: './view-customer.component.html',
-  styleUrls: ['./view-customer.component.scss']
-})
-export class ViewCustomerComponent {
+import { AddRoleComponent } from '../add-role/add-role.component';
+import { EditRoleComponent } from '../edit-role/edit-role.component';
 
+@Component({
+  selector: 'app-view-role',
+  templateUrl: './view-role.component.html',
+  styleUrls: ['./view-role.component.scss']
+})
+export class ViewRoleComponent {
   dataSource!: MatTableDataSource<any>;
-  displayedColumns = ['id','fullname','gender','email','phoneNumber','street','city','state','zipCode','status','action'];
+  displayedColumns = ['id','roleNme','description','action'];
 
   filteredItems: number = 0;
   pageSize: number = 0;
@@ -35,9 +35,8 @@ export class ViewCustomerComponent {
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(
-    private customerService: CustomerService,
+    private roleService: RoleService,
     public dialog: MatDialog,
-    private authServices:AuthServices,
     private swalService:SwalService,
     private router:Router,
   ) {}
@@ -48,7 +47,7 @@ export class ViewCustomerComponent {
   }
 
   getAll(page: number, size: number) {
-    this.customerService.getAll(page, size).subscribe({
+    this.roleService.getAll(page, size).subscribe({
       next: (res: any) => {
         const totalItems = res.totalItems;
         const pageSize = res.pageSize;
@@ -77,7 +76,7 @@ export class ViewCustomerComponent {
       width: '35%',
       disableClose: true,
     };
-    const dialogRef = this.dialog.open(AddCustomerComponent, options);
+    const dialogRef = this.dialog.open(AddRoleComponent, options);
   }
 
   onDelete(item: Customer) {
@@ -92,9 +91,9 @@ export class ViewCustomerComponent {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.customerService.delete(id).subscribe({
+        this.roleService.delete(id).subscribe({
           next: () => {
-            this.swalService.successNotification("Customer Successfully deleted");
+            this.swalService.successNotification("Roles Successfully deleted");
             this.getAll(0,10);
           },
           error: () => {
@@ -115,7 +114,7 @@ export class ViewCustomerComponent {
       width: '35%',
       disableClose: true,
     };
-    const dialogRef = this.dialog.open(EditCustomerComponent, options);
+    const dialogRef = this.dialog.open(EditRoleComponent, options);
   }
 
   clearTableData() {
