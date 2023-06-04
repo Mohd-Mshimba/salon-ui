@@ -1,7 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-toolbar color="primary">
+      <!-- Menu -->
+    </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/resources">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Dashboard
@@ -9,14 +11,17 @@
       <a mat-list-item routerLink="customer" *ngIf="roles=='admin'">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Customer
       </a>
-      <a mat-list-item routerLink="appointment" *ngIf="roles=='customer'">
-        <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Appointment
-      </a>
       <a mat-list-item routerLink="users" *ngIf="roles=='admin'">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> User List
       </a>
       <a mat-list-item routerLink="roles" *ngIf="roles=='admin'">
         <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Roles
+      </a>
+      <a mat-list-item routerLink="appointment" *ngIf="roles=='customer'">
+        <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Appointment
+      </a>
+      <a mat-list-item routerLink="document" *ngIf="roles=='customer'">
+        <mat-icon style="vertical-align: middle; margin-right: 5px;">dashboard</mat-icon> Attachments
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -26,7 +31,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <!-- <span>solon-ui</span> -->
+      <span>{{ roles|titlecase }}</span>
       <span class="spacer"></span>
       <span class="right-links">
         <a mat-button class="no-underline">

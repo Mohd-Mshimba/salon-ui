@@ -6,6 +6,7 @@ import { ViewAppointmentComponent } from "../modules/pages/appointment/view-appo
 import { DashboardComponent } from "../modules/pages/dashboard/dashboard.component";
 import { ViewUserComponent } from "../modules/pages/users/view-user/view-user.component";
 import { ViewRoleComponent } from "../modules/pages/roles/view-role/view-role.component";
+import { ViewDocumentComponent } from "../modules/pages/documents/view-document/view-document.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,9 @@ const routes: Routes = [
       },{
         path:'roles',
         component:ViewRoleComponent
+      },{
+        path:'document',
+        component:ViewDocumentComponent
       },
     ]
   }

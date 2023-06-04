@@ -17,6 +17,8 @@ export interface Employee {
   gender: string;
   status: string;
   email: string;
-  role: string;
+  roles: {
+    id?: number;
+  };
 }
 

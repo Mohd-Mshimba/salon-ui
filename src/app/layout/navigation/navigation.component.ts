@@ -48,12 +48,6 @@ email:any;
       });
     }
 
-    // hasRole(role: number | number[]) {
-    //   const userRole = this.authService.UserInfo.role;
-    //   if (role instanceof Array) return role.includes(userRole);
-    //   return role === userRole;
-    // }
-
   onLogOut(){
     Swal.fire({
       title: 'Are you sure?',

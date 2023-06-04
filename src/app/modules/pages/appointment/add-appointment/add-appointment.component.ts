@@ -29,6 +29,7 @@ export class AddAppointmentComponent {
     this.submitForm = new FormGroup({
       status: new FormControl('1'),
       appointmentDate: new FormControl(new Date()),
+      appointmentName: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
     })
   }
@@ -40,6 +41,7 @@ export class AddAppointmentComponent {
     const requestBody = {
       appointmentDate: data.appointmentDate,
       description: data.description,
+      appointmentName: data.appointmentName,
       status: data.status,
       customer: {
         id: id,

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <h1>Appointment</h1><hr>
+    <h1>Attachments</h1><hr>
   </div>
 </div>
 <div class="row">
@@ -19,32 +19,22 @@
       <mat-cell *matCellDef="let element; let i=index"> {{i+1}} </mat-cell>
     </ng-container>
 
-
-    <ng-container matColumnDef="appointmentName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Appointment Name </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{element.appointmentName}}
-      </mat-cell>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{element.description}}
-      </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> description </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="appointmentDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Appointment Date </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.appointmentDate}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+    <ng-container matColumnDef="documentFile">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> documentFile </mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <span *ngIf="element.status==0" class="badge badge-danger">Rejected</span>
-        <span *ngIf="element.status==1" class="badge badge-warning">Requested</span>
-        <span *ngIf="element.status==2" class="badge badge-success">Approved</span>
+        <a (click)="onAttachment(element)">
+          <mat-icon class="icon"> attach_file</mat-icon>
+        </a>
       </mat-cell>
     </ng-container>
 

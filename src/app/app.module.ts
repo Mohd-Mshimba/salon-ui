@@ -21,6 +21,11 @@ import { ViewUserComponent } from './modules/pages/users/view-user/view-user.com
 import { AddRoleComponent } from './modules/pages/roles/add-role/add-role.component';
 import { EditRoleComponent } from './modules/pages/roles/edit-role/edit-role.component';
 import { ViewRoleComponent } from './modules/pages/roles/view-role/view-role.component';
+import { AddDocumentComponent } from './modules/pages/documents/add-document/add-document.component';
+import { EditDocumentComponent } from './modules/pages/documents/edit-document/edit-document.component';
+import { ViewDocumentComponent } from './modules/pages/documents/view-document/view-document.component';
+import { PreviewDocumentComponent } from './modules/pages/documents/preview-document/preview-document.component';
+import { SafeHtmlPipe } from './modules/shared/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,12 @@ import { ViewRoleComponent } from './modules/pages/roles/view-role/view-role.com
     ViewUserComponent,
     AddRoleComponent,
     EditRoleComponent,
+    SafeHtmlPipe,
     ViewRoleComponent,
+    AddDocumentComponent,
+    EditDocumentComponent,
+    ViewDocumentComponent,
+    PreviewDocumentComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -52,7 +62,9 @@ import { ViewRoleComponent } from './modules/pages/roles/view-role/view-role.com
     BrowserAnimationsModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [
+    SafeHtmlPipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

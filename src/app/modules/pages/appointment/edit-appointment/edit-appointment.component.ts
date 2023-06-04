@@ -33,6 +33,7 @@ export class EditAppointmentComponent {
     this.submitForm = new FormGroup({
       id: new FormControl(data.id),
       appointmentDate: new FormControl(data.appointmentDate),
+      appointmentName: new FormControl(data.appointmentName, [Validators.required]),
       description: new FormControl(data.description, [Validators.required]),
       status: new FormControl(data.status),
     })
@@ -46,6 +47,7 @@ export class EditAppointmentComponent {
     const requestBody = {
       appointmentDate: data.appointmentDate,
       description: data.description,
+      appointmentName: data.appointmentName,
       status: data.status,
       customer: {
         id: customerId,

@@ -1,5 +1,4 @@
 import { AuthServices } from './../../../auth/services/auth-services';
-import { CustomerService } from 'src/app/modules/services/customer.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SwalService } from 'src/app/modules/shared/swal.service';
@@ -35,9 +34,6 @@ export class AddUserComponent {
   getAllRole(page: number, size: number) {
     this.roleService.getAll(page, size).subscribe({
       next: (res: any) => {
-        console.log('====================================');
-        console.log(res);
-        console.log('====================================');
         this.roles = res;
       },
       error: () => {

@@ -11,6 +11,7 @@ export interface Appointment {
   id?: number;
   status: string;
   description:string;
+  appointmentName:string;
   appointmentDate: string,
   customer: {
     id: number;

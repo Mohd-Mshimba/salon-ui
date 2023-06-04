@@ -1,0 +1,10 @@
+<div class="d-flex p-3 align-items-center justify-content-between">
+  <div>{{title}}</div>
+  <button class="btn btn-warning btn-sm" [mat-dialog-close]="true">
+    <i class="fa fa-close"></i>   Close
+  </button>
+</div>
+<div [hidden]="!file" class="full-height">
+  <object class="full-height" style="margin:0px; width: 100%;" [data]="file | safeHtml" type="application/pdf">
+  </object>
+</div>
